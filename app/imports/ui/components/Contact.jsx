@@ -14,9 +14,9 @@ class Contact extends React.Component {
 
   deleteCallBack(error) {
     if (error) {
-      Bert.alert({ type: 'danger', message: `Add failed: ${error.message}` });
+      Bert.alert({ type: 'danger', message: `Delete failed: ${error.message}` });
     } else {
-      Bert.alert({ type: 'success', message: 'Add succeeded' });
+      Bert.alert({ type: 'success', message: 'Delete succeeded' });
       this.formRef.reset();
     }
   }
