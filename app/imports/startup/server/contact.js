@@ -12,12 +12,12 @@ function addData(data) {
 if (Contacts.find().count() === 0) {
   if (Meteor.settings.defaultContacts) {
     console.log('Creating default Contacts.');
-    Meteor.settings.defaultContacs.map(data => addData(data));
+    Meteor.settings.defaultContacts.map(data => addData(data));
   }
 }
 
 /** This subscription publishes only the documents associated with the logged in user */
-Meteor.publish('Stuff', function publish() {
+Meteor.publish('Contacts', function publish() {
   if (this.userId) {
     const username = Meteor.users.findOne(this.userId).username;
     return Contacts.find({ owner: username });

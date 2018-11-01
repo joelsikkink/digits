@@ -1,2 +1,2 @@
 import '/imports/api/stuff';
-import '/app/imports/startup/both/index';
+import '/imports/api/contact/';
