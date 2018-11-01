@@ -1,10 +1,30 @@
 import React from 'react';
-import { Card, Image } from 'semantic-ui-react';
+import { Card, Image, Button } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
+import { Bert } from 'meteor/themeteorchef:bert';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 class Contact extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.onClick = this.onClick.bind(this);
+  }
+
+  deleteCallBack(error) {
+    if (error) {
+      Bert.alert({ type: 'danger', message: `Add failed: ${error.message}` });
+    } else {
+      Bert.alert({ type: 'success', message: 'Add succeeded' });
+      this.formRef.reset();
+    }
+  }
+
+   onClick() {
+  Contact.remove(this.props.contact, this.deleteCallBack());
+}
+
   render() {
     return (
         <Card>
@@ -16,9 +36,13 @@ class Contact extends React.Component {
               {this.props.contact.description}
             </Card.Description>
           </Card.Content>
+          <Card.Content extra>
+            <Button className="ui button" onSubmit={this.onClick}>Delete</Button>
+          </Card.Content>
         </Card>
     );
   }
+
 }
 
 /** Require a document to be passed to this component. */
